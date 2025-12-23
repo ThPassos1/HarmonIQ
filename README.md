@@ -114,7 +114,6 @@ npm run build
 ## Notas e melhorias sugeridas
 
 - [ ] Persistência de uploads (S3 ou Supabase)
-- [ ] Migrations do banco (tá usando SQLite direto)
 - [ ] Validar entradas melhor
 - [ ] Adicionar testes (Jest/Cypress)
 - [ ] Integrar conversão real de PDF → MIDI

@@ -1,16 +1,16 @@
 import pool from "../config/db.js";
 
-// -----------------------------------
-// GET /conversions  → lista conversões
-// -----------------------------------
+// lista conversões do usuário
 export const list = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const [rows] = await pool.query(
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(
       "SELECT id, file_name, midi_path, created_at FROM conversions WHERE user_id = ? ORDER BY created_at DESC",
       [userId]
     );
+    connection.release();
 
     res.json(rows);
 
@@ -20,9 +20,7 @@ export const list = async (req, res) => {
   }
 };
 
-// ---------------------------------------------------
-// POST /conversions  → registra uma nova conversão
-// ---------------------------------------------------
+// registra uma nova conversão
 export const create = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -32,10 +30,13 @@ export const create = async (req, res) => {
       return res.status(400).json({ error: "Dados incompletos" });
     }
 
-    await pool.query(
+    // TODO: implementar upload real de arquivo depois
+    const connection = await pool.getConnection();
+    await connection.execute(
       "INSERT INTO conversions (user_id, file_name, midi_path) VALUES (?, ?, ?)",
       [userId, file_name, midi_path]
     );
+    connection.release();
 
     res.json({ message: "Conversão registrada com sucesso" });
 
