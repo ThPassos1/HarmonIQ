@@ -1,10 +1,14 @@
-const mysql = require("mysql2/promise");
+import mysql from "mysql2/promise";
 
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",        // ou o usuário do seu MySQL
-  password: "",        // sua senha (ou vazio se não tiver)
-  database: "harmoniq"
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "harmoniq",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-module.exports = pool;
+export default pool;
+

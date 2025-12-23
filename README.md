@@ -22,7 +22,7 @@ Um projeto de estudos onde você pode fazer upload de partituras em PDF, convert
 ## Tecnologias
 
 - Frontend: React 18, Vite, Tailwind CSS, Radix UI, Framer Motion
-- Backend: Node.js, Express, sqlite3 (e `sqlite`), suporte a MySQL (config de pool em `Backend/config/db.js`)
+- Backend: Node.js, Express, MySQL 8.0+
 - Autenticação: JWT
 
 ## Pré-requisitos
@@ -41,7 +41,28 @@ npm run dev
 
 O frontend roda por padrão em `http://localhost:3000` (script `dev` usa Vite no `--port 3000`).
 
-2. Backend:
+2. Configurar MySQL:
+
+Certifique-se de que MySQL está rodando. Execute o schema para criar o banco:
+
+```bash
+mysql -u root < Backend/schema.sql
+```
+
+3. Backend:
+
+Crie um arquivo `.env` no diretório `Backend/` com as credenciais do MySQL:
+
+```env
+PORT=3001
+JWT_SECRET=sua_chave_secreta_aqui
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_NAME=harmoniq
+```
+
+Depois instale e rode:
 
 ```bash
 cd Backend
@@ -52,12 +73,19 @@ npm run dev
 O backend inicia em `http://localhost:3001` (ver `Backend/server.js`). A API monta as rotas principais em `/auth`, `/users` e `/conversions`.
 
 Observações:
-- O backend atual abre um arquivo SQLite local `./database.db` (veja `Backend/server.js`). Há também um arquivo de exemplo `Backend/config/db.js` com pool MySQL.
-- Caso queira usar MySQL, adapte a conexão e crie o banco `harmoniq` conforme o arquivo `Backend/config/db.js`.
+- Você precisa ter MySQL 8.0+ instalado e rodando
+- O schema está em `Backend/schema.sql` - execute esse arquivo pra criar as tabelas
 
 ## Variáveis de ambiente
 
-- O projeto carrega `.env` no backend via `dotenv`, então você pode adicionar variáveis conforme necessário (por exemplo `PORT`, `DATABASE_URL`, `JWT_SECRET`). Atualmente o servidor usa porta 3001 hard-coded, mas é simples alterá-la no `server.js`.
+Backend carrega `.env` via `dotenv`. Variáveis necessárias:
+
+- `PORT` - porta do servidor (padrão: 3001)
+- `JWT_SECRET` - chave para assinar JWTs (gere uma string forte!)
+- `DB_HOST` - host do MySQL (padrão: localhost)
+- `DB_USER` - usuário MySQL (padrão: root)
+- `DB_PASSWORD` - senha do MySQL
+- `DB_NAME` - nome do banco (padrão: harmoniq)
 
 ## Endpoints principais (resumo)
 

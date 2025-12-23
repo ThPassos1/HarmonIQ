@@ -11,7 +11,8 @@
 - [ ] Mobile responsividade (tá funcional mas pode melhorar)
 
 ## Backend
-- [ ] Criar migrations do banco (SQLite → SQL Schema)
+- [x] Migrar de SQLite para MySQL
+- [ ] Implementar outros routes (userRoutes, conversionRoutes) com MySQL
 - [ ] Implementar upload real de arquivos (multipart/form-data)
 - [ ] Endpoint de conversão PDF → MIDI integrado
 - [ ] Salvar conversões no histórico do usuário
@@ -24,6 +25,6 @@
 ## Geral
 - [ ] Documentação de API (Swagger/OpenAPI)
 - [ ] CI/CD melhorado
-- [ ] Variáveis de ambiente bem definidas
 - [ ] Deploy de produção (backend)
 - [ ] Monitoramento e logs
+- [ ] Migração de dados do SQLite (se houver dados antigos)
