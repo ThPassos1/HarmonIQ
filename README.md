@@ -1,17 +1,18 @@
-# HarmonIQ
+# HarmonIQ 🎵
 
-> HarmonIQ — conversor de partituras (frontend em React + backend em Node/Express).
+Conversor de partituras PDF para MIDI com loja integrada.
 
-## Visão geral
+## O que é?
 
-HarmonIQ é uma aplicação web que permite aos usuários carregar partituras em PDF e convertê-las para MIDI, além de oferecer uma pequena loja e painel de usuário. O frontend usa Vite + React com Tailwind e componentes Radix/UI; o backend é uma API em Node/Express usando SQLite (com amostra de configuração MySQL disponível).
+Um projeto de estudos onde você pode fazer upload de partituras em PDF, converter pra MIDI (basicamente), gerenciar créditos e comprar mais funcionalidades. Frontend em React, backend em Node.
 
 ## Principais recursos
 
-- Upload de PDFs de partitura e conversão simulada para MIDI
-- Autenticação (registro/login) e gerenciamento de sessão local
-- Dashboard do usuário com créditos e histórico de conversões
-- Loja com carrinho e integração de checkout (front-end)
+- Upload de PDFs (conversão de partitura pro MIDI)
+- Autenticação com JWT (login/registro)
+- Dashboard com créditos
+- Loja com carrinho (ainda tá meio básico)
+- Tailwind + componentes do Radix
 
 ## Estrutura do projeto
 
@@ -84,11 +85,13 @@ npm run build
 
 ## Notas e melhorias sugeridas
 
-- Persistência de uploads: mover arquivos para armazenamento em nuvem (S3, Supabase Storage) ao invés de salvar localmente.
-- Migrations: adicionar migrações para gerenciar esquema do banco (ex.: Knex.js, Sequelize ou um script SQL dedicado).
-- Segurança: garantir `JWT_SECRET` seguro e validação/limpeza de entradas do usuário.
-- Testes: adicionar testes unitários e e2e (Jest, Playwright/Cypress).
-- Integração real de conversão PDF → MIDI: conectar serviço de conversão real (externo ou interno) e endpoints para upload multipart/form-data.
+- [ ] Persistência de uploads (S3 ou Supabase)
+- [ ] Migrations do banco (tá usando SQLite direto)
+- [ ] Validar entradas melhor
+- [ ] Adicionar testes (Jest/Cypress)
+- [ ] Integrar conversão real de PDF → MIDI
+- [ ] Dashboard com histórico de conversões funcionando
+- [ ] Loja com integração de pagamento real
 
 ## Onde procurar o código
 
@@ -100,12 +103,4 @@ npm run build
 
 ## Contato
 
-Se quiser, eu posso:
-
-- ajustar `.env.example`
-- criar scripts de deploy
-- adicionar instruções de uso mais detalhadas para cada endpoint
-
----
-
-Arquivo criado automaticamente por assistente. Boa parte do comportamento está implementado no frontend (upload/UX); verifique os controllers do backend para integrar a conversão real.
+Qualquer dúvida, abre uma issue ou me manda mensagem.

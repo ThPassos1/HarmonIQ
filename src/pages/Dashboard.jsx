@@ -24,6 +24,7 @@ const Dashboard = () => {
         credits: 10,
       });
 
+      // TODO: buscar conversões do usuário da API depois
       setConversions([]);
     }
   }, [user, loading, navigate]);
@@ -71,6 +72,7 @@ const Dashboard = () => {
             <div className="bg-[#1a1a1a] rounded-2xl p-6 card-shadow">
               <h3 className="text-2xl gold-text font-bold mb-6">Histórico de conversões</h3>
 
+              {/* TODO: implementar tabela com histórico quando API retornar dados */}
               <p className="text-center text-[#EAEAEA]/70 py-12">Nenhuma conversão ainda</p>
             </div>
           </div>

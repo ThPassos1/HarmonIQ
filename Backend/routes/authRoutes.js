@@ -6,9 +6,7 @@ import db from "../db.js";
 
 const router = express.Router();
 
-// --------------------------------------
-// 🔐 LOGIN
-// --------------------------------------
+// login do usuário
 router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
@@ -31,7 +29,8 @@ router.post("/login", (req, res) => {
                 return res.json({ error: "Credenciais inválidas." });
             }
 
-            // Gerar token JWT
+            // gera token JWT - válido por 7 dias
+            // TODO: adicionar refresh token depois
             const token = jwt.sign(
                 { id: user.id, email: user.email },
                 process.env.JWT_SECRET,
@@ -50,12 +49,11 @@ router.post("/login", (req, res) => {
     );
 });
 
-// --------------------------------------
-// 📝 REGISTRO
-// --------------------------------------
+// registrar novo usuário
 router.post("/register", (req, res) => {
     const { name, email, password } = req.body;
 
+    // TODO: validar email format corretamente
     db.get(
         `SELECT id FROM users WHERE email = ?`,
         [email],

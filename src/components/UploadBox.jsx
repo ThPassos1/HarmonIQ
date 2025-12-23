@@ -40,6 +40,7 @@ const UploadBox = ({ onFileSelect }) => {
       return;
     }
 
+    // TODO: aumentar limite de arquivo depois (agora tá 10MB)
     if (file.size > 10 * 1024 * 1024) {
       toast({
         title: "Arquivo muito grande",
